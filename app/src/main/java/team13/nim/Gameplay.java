@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import java.util.*;
 
 public class Gameplay extends AppCompatActivity {
 
@@ -66,4 +67,40 @@ public class Gameplay extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+/*
+    public int[] casualMove()
+    {
+        Random random = new Random();
+        int row = random.nextInt(numRows + 1 - 0) + 0;
+        int remove = random.nextInt(gameBoard[row] + 1 - 1) + 1;
+        int [] move = {row, remove};
+    }
+
+    public int[] hardcoreMove()
+    {
+        int nimSum = calcNimSum(gameBoard);
+        int [] temp = gameBoard.clone();
+        for (int k = 0; k < numRows; k++)
+        {
+            temp[k] = temp[k] - nimSum;
+            if (calcNimSum == 0)
+                {
+                    //correct move
+                    int [] move = {k, nimSum};
+                    break;
+                }
+            else
+                temp = gameBoard.clone
+        }
+    }
+
+    public int calcNimSum(int [] arr)
+    {
+        int ret = 0;
+        for (int j = 0; j < numRows; j++)
+        {
+            ret = ret ^ gameBoard[j];
+        }
+    }
+*/
 }
