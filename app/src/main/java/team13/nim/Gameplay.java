@@ -16,11 +16,38 @@ public class Gameplay extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-
         //getse the values from the parent activity
         int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
         int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
 
+        int [] gameBoard = new int[numRows];
+        for (int i = 0; i < numRows; i++)
+        {
+            switch(i) {
+                case 0:
+                    gameBoard[i] = 0b0001;
+                    break;
+                case 1:
+                    gameBoard[i] = 0b0010;
+                    break;
+                case 2:
+                    gameBoard[i] = 0b0011;
+                    break;
+                case 3:
+                    gameBoard[i] = 0b0100;
+                    break;
+                case 4:
+                    gameBoard[i] = 0b0101;
+                    break;
+                case 5:
+                    gameBoard[i] = 0b0110;
+                    break;
+                case 6:
+                    gameBoard[i] = 0b0111;
+                    break;
+            }
+            System.out.println(Integer.toBinaryString(gameBoard[i]) + "\n");
+        }
 
         //uses those values
 
