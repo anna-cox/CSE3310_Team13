@@ -46,7 +46,6 @@ public class Gameplay extends AppCompatActivity {
                     gameBoard[i] = 0b0111;
                     break;
             }
-            System.out.println(Integer.toBinaryString(gameBoard[i]) + "\n");
         }
 
         //uses those values
