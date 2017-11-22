@@ -24,9 +24,6 @@ public class Configurations extends AppCompatActivity {
         //now this activity has the username
         String username = intent.getStringExtra(MainActivity.username);
 
-        TextView textView = (TextView) findViewById(R.id.username);
-        textView.setText(username);
-
     }
 
 

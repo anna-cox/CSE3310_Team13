@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    public EditText user_name;
+    private EditText user_name;
     private Button Button;
     private Button Guest;
     static String username;
+    boolean is_guest = false;
 
 
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                is_guest = true;
                 Intent intent = new Intent(MainActivity.this, Configurations.class);
                 startActivity(intent);
             }
@@ -57,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Configurations.class);
                 startActivity(intent);
             }
+    }
+    public static String username_getter()
+    {
+        return username;
     }
 
 }
