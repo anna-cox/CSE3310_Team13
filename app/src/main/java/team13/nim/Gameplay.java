@@ -20,6 +20,7 @@ public class Gameplay extends AppCompatActivity {
         //getse the values from the parent activity
         int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
         int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
+        int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
 
         int [] gameBoard = new int[numRows];
         for (int i = 0; i < numRows; i++)
@@ -60,6 +61,14 @@ public class Gameplay extends AppCompatActivity {
             player.setText("You");
         else
             player.setText("Computer");
+
+
+        TextView diff = (TextView)findViewById(R.id.difficulty);
+        if(difficulty == 1)
+            diff.setText("Easy");
+        else if(difficulty==2)
+            diff.setText("Medium");
+        else diff.setText("Hard");
     }
 
     public void backToHome(View view)
