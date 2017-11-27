@@ -1,18 +1,22 @@
 package team13.nim;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.RadioButton;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+
 
 public class Configurations extends AppCompatActivity {
 
-    public static final String STARTPLAYER = "com.example.myfirstapp.player";
-    public static final String NUMROWS = "com.example.myfirstapp.numrows";
-    public static final String DIFFICULTY = "com.example.myfirstapp.difficulty";
+    public static final String STARTPLAYER = "com.team13.nim.player";
+    public static final String NUMROWS = "com.team13.nim.numrows";
+    public static final String PLAYERNAME = "com.team13.nim.username";
+    public static final String DIFFICULTY = "com.team13.nim.difficulty";
+
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +27,34 @@ public class Configurations extends AppCompatActivity {
         Intent intent = getIntent();
 
         //now this activity has the username
-        String username = intent.getStringExtra(MainActivity.username);
+        username = intent.getStringExtra(MainActivity.USERNAME);
+
+
+        //String username = intent.getStringExtra(MainActivity.username);
+
+
+        if(!(MainActivity.get().is_guest()))
+        {
+            final UserData user = new UserData();
+
+            user.setLosses(0);
+            user.setWins(0);
+            user.setUsername(username);
+
+            new Thread(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    MainActivity.get().getDB().userDao().addUser(user);
+                }
+            }).start();
+        }
+
+
 
     }
+
 
 
     public void startGame(View view) {
@@ -35,7 +64,7 @@ public class Configurations extends AppCompatActivity {
 
         int whoStarts;
         int numRows;
-        int difficulty;  //1 for easy, 2 for medium, and 3 for hard.
+        int difficulty;
 
         //gets the start player from the radio buttons
         if (((RadioButton) findViewById(R.id.computerStart)).isChecked()) {

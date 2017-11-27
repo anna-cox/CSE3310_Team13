@@ -31,7 +31,7 @@
         android:layout_below="@+id/username"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="23dp"
-        android:onClick="startSettings"
+        android:onClick="validate"
         android:text="Login"
         app:layout_constraintBaseline_toBaselineOf="@+id/username"
         app:layout_constraintLeft_toRightOf="@+id/username"
@@ -55,5 +55,6 @@
         app:srcCompat="@drawable/logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+
         android:layout_marginTop="26dp" />
 </RelativeLayout>

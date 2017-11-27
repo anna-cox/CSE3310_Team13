@@ -9,6 +9,8 @@ import java.util.*;
 
 public class Gameplay extends AppCompatActivity {
 
+    String username = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,10 +19,11 @@ public class Gameplay extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //getse the values from the parent activity
+        //gets the values from the parent activity
         int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
         int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
         int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
+        username = intent.getStringExtra(Configurations.PLAYERNAME);
 
         int [] gameBoard = new int[numRows];
         for (int i = 0; i < numRows; i++)
@@ -50,7 +53,6 @@ public class Gameplay extends AppCompatActivity {
             }
         }
 
-        //uses those values
 
         TextView rows = (TextView)findViewById(R.id.numRows);
         rows.setText(Integer.toString(numRows));
@@ -76,6 +78,7 @@ public class Gameplay extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 /*
     public int[] casualMove()
     {
@@ -112,4 +115,8 @@ public class Gameplay extends AppCompatActivity {
         }
     }
 */
+
+
+
+
 }
