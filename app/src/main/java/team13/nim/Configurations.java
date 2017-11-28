@@ -54,9 +54,6 @@ public class Configurations extends AppCompatActivity {
 
 
     }
-
-
-
     public void startGame(View view) {
         //creates the intent with the configurations class
         Intent intent = new Intent(this, Gameplay.class);

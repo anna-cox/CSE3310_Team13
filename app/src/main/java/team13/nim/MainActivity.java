@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 
@@ -15,10 +16,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //private EditText user_name;
-    private Button Button;
     private Button Guest;
     static String username;
     boolean is_guest = false;
+    boolean keep_playing = false;
 
     public static MainActivity THIS;
 
@@ -33,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
 
         Guest = (Button)findViewById(R.id.play_as_guest);
@@ -71,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
     {
         EditText user_name = (EditText)findViewById(R.id.username);
         username = user_name.getText().toString();
+
+        if (((RadioButton) findViewById(R.id.play_once)).isChecked())
+            keep_playing = true;
+        else keep_playing = false;
 
         if(username!=null && username.length()==0)
         {
