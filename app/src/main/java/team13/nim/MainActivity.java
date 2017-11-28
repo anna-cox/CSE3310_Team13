@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -116,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
                       topUser = users[i].getUsername();
                   }
                 }
+
+                ((TextView)(findViewById(R.id.h_s))).setText(Integer.toString(topScore));
+                ((TextView)(findViewById(R.id.h_s_user))).setText(topUser);
 
             }
         }).start();
