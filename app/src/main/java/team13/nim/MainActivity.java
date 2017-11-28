@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        topScore();
 
         THIS = this;
     }
@@ -91,4 +92,35 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean is_guest() {return is_guest;}
 
+
+
+    //displays the top score on the homepage
+    private void topScore()
+    {
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                int topScore = 0;
+                String topUser = "none";
+                UserData[] users = MainActivity.get().getDB().userDao().getAllUsers();
+                for(int i=0;i<users.length;i++)
+                {
+                  if(users[i].getWins()>topScore)
+                  {
+                      topScore = users[i].getWins();
+                      topUser = users[i].getUsername();
+                  }
+                }
+
+            }
+        }).start();
+
+
+    }
+
+
 }
+
+

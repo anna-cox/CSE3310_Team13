@@ -20,4 +20,8 @@ public interface UserDao
 
     @Query("SELECT * FROM UserData WHERE username LIKE :name")
     public UserData getUser(String name);
+
+    @Query("SELECT * FROM UserData")
+    public UserData[] getAllUsers();
+
 }
