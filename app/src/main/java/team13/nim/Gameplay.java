@@ -25,6 +25,7 @@ public class Gameplay extends AppCompatActivity {
         int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
         username = intent.getStringExtra(Configurations.PLAYERNAME);
 
+
         int [] gameBoard = new int[numRows];
         for (int i = 0; i < numRows; i++)
         {
