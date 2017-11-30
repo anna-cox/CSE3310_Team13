@@ -10,6 +10,7 @@ import java.util.*;
 public class Gameplay extends AppCompatActivity {
 
     String username = null;
+    int wait = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +55,30 @@ public class Gameplay extends AppCompatActivity {
             }
         }
 
-
-        TextView rows = (TextView)findViewById(R.id.numRows);
-        rows.setText(Integer.toString(numRows));
-
-
-        TextView player = (TextView)findViewById(R.id.startPlayer);
-        if(whoStarts == 0)
-            player.setText("You");
-        else
-            player.setText("Computer");
-
-
-        TextView diff = (TextView)findViewById(R.id.difficulty);
-        if(difficulty == 1)
-            diff.setText("Easy");
-        else if(difficulty==2)
-            diff.setText("Medium");
-        else diff.setText("Hard");
     }
 
     public void backToHome(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void waitTime(View view)
+    {
+        wait++;
+    }
+
+    public void remove(View view)
+    {
+        //add code here to change gp color to removed
+
+        //add code here to update the nimsum array
+    }
+
+    public void select(View view)
+    {
+        //add logic to stop illegal selection
+        //add code to change color to selected
     }
 
 /*
