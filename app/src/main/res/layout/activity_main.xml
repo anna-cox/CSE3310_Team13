@@ -67,22 +67,21 @@
         app:layout_constraintTop_toBottomOf="@+id/rows"
         android:layout_below="@+id/username"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:weightSum="1">
 
 
-    <RadioButton
-        android:id="@+id/play_once"
-        android:layout_width="266dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/username"
-        android:text="Play once" />
+        <RadioButton
+            android:id="@+id/play_once"
+            android:layout_width="251dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/username"
+            android:text="Play once" />
 
         <RadioButton
             android:id="@+id/keep_playing"
-            android:layout_width="wrap_content"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -94,13 +93,13 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        android:text="Top Score:"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/startpage_button"
-        android:layout_toStartOf="@+id/startpage_button" />
+        android:layout_marginBottom="22dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_toLeftOf="@+id/h_s_user"
+        android:layout_toStartOf="@+id/h_s_user"
+        android:text="Top Score:" />
 
     <TextView
         android:id="@+id/h_s"
@@ -118,10 +117,9 @@
         android:id="@+id/h_s_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/startpage_button"
-        android:layout_alignStart="@+id/startpage_button"
-        android:layout_alignTop="@+id/h_s"
-        android:layout_toLeftOf="@+id/h_s"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_centerHorizontal="true"
         android:text="TextView" />
 
 
