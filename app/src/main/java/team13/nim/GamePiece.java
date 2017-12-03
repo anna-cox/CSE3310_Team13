@@ -11,22 +11,40 @@ import android.util.AttributeSet;
 public class GamePiece extends android.support.v7.widget.AppCompatButton {
 
     int color; //0=unselected, 1=selected, 2=removed
+    int numRow;
 
     public GamePiece(Context context)
     {
         super(context);
+
     }
     public GamePiece(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+        numRow = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "minWidth",8);
     }
     public GamePiece(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
+        numRow = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "minWidth",8);
     }
 
     public void chngColor(int c)
     {
         color = c;
+        if(color == 0)
+            this.setBackgroundResource(R.drawable.circle);
+        else if(color == 1)
+            this.setBackgroundResource(R.drawable.pressed);
+        else
+            this.setBackgroundResource(R.drawable.removed);
     }
+
+    public int getColor()
+    {
+        return color;
+    }
+
+    public int getRow(){return numRow;}
+
 }

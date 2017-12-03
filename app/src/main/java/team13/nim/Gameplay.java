@@ -10,6 +10,8 @@ import java.util.*;
 public class Gameplay extends AppCompatActivity {
 
     String username = null;
+    int wait = 0;
+    GamePiece gps[] = new GamePiece[28];
     int wait_mult = 1;
 
     int [] gameBoard = new int[7];
@@ -27,6 +29,36 @@ public class Gameplay extends AppCompatActivity {
         int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
         username = intent.getStringExtra(Configurations.PLAYERNAME);
         buildBoard();
+
+
+        int [] gameBoard = new int[numRows];
+        for (int i = 0; i < numRows; i++)
+        {
+            switch(i) {
+                case 0:
+                    gameBoard[i] = 0b0001;
+                    break;
+                case 1:
+                    gameBoard[i] = 0b0010;
+                    break;
+                case 2:
+                    gameBoard[i] = 0b0011;
+                    break;
+                case 3:
+                    gameBoard[i] = 0b0100;
+                    break;
+                case 4:
+                    gameBoard[i] = 0b0101;
+                    break;
+                case 5:
+                    gameBoard[i] = 0b0110;
+                    break;
+                case 6:
+                    gameBoard[i] = 0b0111;
+                    break;
+            }
+        }
+        makeArray();
 
 
 
@@ -65,7 +97,20 @@ public class Gameplay extends AppCompatActivity {
     public void select(View view)
     {
         //add logic to stop illegal selection
+        GamePiece gp = (GamePiece) view;
+        if(gp.getColor() == 2)
+            return;
+
+        int currentRow = gp.getRow();
+
+        for(int i=0; i<28; i++)
+        {
+            if(gps[i].getRow() != currentRow)
+                gps[i].chngColor(0);
+        }
+
         //add code to change color to selected
+        gp.chngColor(1);
     }
 
     public int[] casualMove()
@@ -141,7 +186,37 @@ public class Gameplay extends AppCompatActivity {
         }
     }
 
-
+    public void makeArray()
+    {
+        gps[0] = (GamePiece) findViewById(R.id.gp1);
+        gps[1] = (GamePiece) findViewById(R.id.gp21);
+        gps[2] = (GamePiece) findViewById(R.id.gp22);
+        gps[3] = (GamePiece) findViewById(R.id.gp31);
+        gps[4] = (GamePiece) findViewById(R.id.gp32);
+        gps[5] = (GamePiece) findViewById(R.id.gp33);
+        gps[6] = (GamePiece) findViewById(R.id.gp41);
+        gps[7] = (GamePiece) findViewById(R.id.gp42);
+        gps[8] = (GamePiece) findViewById(R.id.gp43);
+        gps[9] = (GamePiece) findViewById(R.id.gp44);
+        gps[10] = (GamePiece) findViewById(R.id.gp51);
+        gps[11] = (GamePiece) findViewById(R.id.gp52);
+        gps[12] = (GamePiece) findViewById(R.id.gp53);
+        gps[13] = (GamePiece) findViewById(R.id.gp54);
+        gps[14] = (GamePiece) findViewById(R.id.gp55);
+        gps[15] = (GamePiece) findViewById(R.id.gp61);
+        gps[16] = (GamePiece) findViewById(R.id.gp62);
+        gps[17] = (GamePiece) findViewById(R.id.gp63);
+        gps[18] = (GamePiece) findViewById(R.id.gp64);
+        gps[19] = (GamePiece) findViewById(R.id.gp65);
+        gps[20] = (GamePiece) findViewById(R.id.gp66);
+        gps[21] = (GamePiece) findViewById(R.id.gp71);
+        gps[22] = (GamePiece) findViewById(R.id.gp71);
+        gps[23] = (GamePiece) findViewById(R.id.gp73);
+        gps[24] = (GamePiece) findViewById(R.id.gp74);
+        gps[25] = (GamePiece) findViewById(R.id.gp75);
+        gps[26] = (GamePiece) findViewById(R.id.gp76);
+        gps[27] = (GamePiece) findViewById(R.id.gp77);
+    }
 
 
 }
