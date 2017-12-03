@@ -14,7 +14,7 @@ public class Gameplay extends AppCompatActivity {
     int wait_mult = 1;
     int currentRow;
 
-    int [] gameBoard = new int[6];
+    int [] gameBoard = new int[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,23 +63,23 @@ public class Gameplay extends AppCompatActivity {
             }
         }
         //add code here to change gp color to removed
-       gameBoard[currentRow - 1] = gameBoard[currentRow - 1] - cntr;
+       gameBoard[currentRow] = gameBoard[currentRow] - cntr;
         winnable = winnable - cntr;
-        try {
+        /*try {
             wait(wait_mult * 1000);
         }
         catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 0)
-            move = casualMove();
+        }*/
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 1)
+            move = casualMove();
+        if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 2)
             move = hardcoreMove();
         currentRow = move[0];
         cntr = move[1];
         for (int j = 0; j < 28; j++)
         {
-            if (gps[j].getRow() == currentRow && gps[j].getColor() == 0 && cntr > 0)
+            if ((gps[j].getRow() == currentRow) && (gps[j].getColor() == 0) && (cntr > 0))
             {
                 gps[j].chngColor(2);
                 cntr--;
@@ -124,6 +124,7 @@ public class Gameplay extends AppCompatActivity {
         Intent data = getIntent();
         Random random = new Random();
         int row = random.nextInt(data.getIntExtra(Configurations.NUMROWS, 0) + 1 - 0) + 0;
+        System.out.println(row);
         int remove = random.nextInt(gameBoard[row] + 1 - 1) + 1;
         int [] move = {row, remove};
         return move;
@@ -201,34 +202,34 @@ public class Gameplay extends AppCompatActivity {
         gps[26] = (GamePiece) findViewById(R.id.gp76);
         gps[27] = (GamePiece) findViewById(R.id.gp77);
 
-        gps[0].setRow(1);
-        gps[1].setRow(2);
-        gps[2].setRow(2);
-        gps[3].setRow(3);
-        gps[4].setRow(3);
-        gps[5].setRow(3);
-        gps[6].setRow(4);
-        gps[7].setRow(4);
-        gps[8].setRow(4);
-        gps[9].setRow(4);
-        gps[10].setRow(5);
-        gps[11].setRow(5);
-        gps[12].setRow(5);
-        gps[13].setRow(5);
-        gps[14].setRow(5);
-        gps[15].setRow(6);
-        gps[16].setRow(6);
-        gps[17].setRow(6);
-        gps[18].setRow(6);
-        gps[19].setRow(6);
-        gps[20].setRow(6);
-        gps[21].setRow(7);
-        gps[22].setRow(7);
-        gps[23].setRow(7);
-        gps[24].setRow(7);
-        gps[25].setRow(7);
-        gps[26].setRow(7);
-        gps[27].setRow(7);
+        gps[0].setRow(0);
+        gps[1].setRow(1);
+        gps[2].setRow(1);
+        gps[3].setRow(2);
+        gps[4].setRow(2);
+        gps[5].setRow(2);
+        gps[6].setRow(3);
+        gps[7].setRow(3);
+        gps[8].setRow(3);
+        gps[9].setRow(3);
+        gps[10].setRow(4);
+        gps[11].setRow(4);
+        gps[12].setRow(4);
+        gps[13].setRow(4);
+        gps[14].setRow(4);
+        gps[15].setRow(5);
+        gps[16].setRow(5);
+        gps[17].setRow(5);
+        gps[18].setRow(5);
+        gps[19].setRow(5);
+        gps[20].setRow(5);
+        gps[21].setRow(6);
+        gps[22].setRow(6);
+        gps[23].setRow(6);
+        gps[24].setRow(6);
+        gps[25].setRow(6);
+        gps[26].setRow(6);
+        gps[27].setRow(6);
     }
 
 
