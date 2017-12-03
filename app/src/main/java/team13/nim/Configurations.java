@@ -79,12 +79,10 @@ public class Configurations extends AppCompatActivity {
             numRows = 7;
         }
 
-        //gets the difficulty level .....0 for casual, 1 for hardcore
+        //gets the difficulty level .....1 for easy, 2 for medium and 3 for hard.
         if (((RadioButton) findViewById(R.id.easy)).isChecked())
-            difficulty=0;
-        else
             difficulty=1;
-
+        else difficulty=2;
 
         //attaches the values to the activity
         intent.putExtra(STARTPLAYER, whoStarts);
