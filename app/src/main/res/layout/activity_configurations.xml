@@ -9,54 +9,56 @@
 
     <Button
         android:id="@+id/button"
+        style="@android:style/Widget.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
         android:onClick="startGame"
         android:text="@string/start_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="49dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <TextView
         android:id="@+id/rows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGroup"
         android:layout_marginTop="31dp"
+        android:fontFamily="monospace"
         android:text="@string/rows"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
-        app:layout_constraintVertical_bias="0.185"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.027"
-        android:layout_below="@+id/radioGroup"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
 
 
     <TextView
         android:id="@+id/who"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="@string/who_goes_first"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
     <RadioGroup
@@ -74,34 +76,33 @@
         android:weightSum="1">
 
 
-
         <RadioButton
             android:id="@+id/rows5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
+            android:layout_weight="0.50"
             android:text="5"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="137dp"
-            android:layout_weight="0.50" />
+            tools:layout_editor_absoluteY="137dp" />
 
         <RadioButton
             android:id="@+id/rows6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.44"
             android:text="6"
             tools:layout_editor_absoluteX="172dp"
-            tools:layout_editor_absoluteY="137dp"
-            android:layout_weight="0.44" />
+            tools:layout_editor_absoluteY="137dp" />
 
         <RadioButton
             android:id="@+id/rows7"
-            android:layout_width="wrap_content"
+            android:layout_width="284dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.06"
             android:text="7"
             tools:layout_editor_absoluteX="328dp"
-            tools:layout_editor_absoluteY="137dp"
-            android:layout_weight="0.06" />
+            tools:layout_editor_absoluteY="137dp" />
 
     </RadioGroup>
 
@@ -109,19 +110,22 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/radioGroup2"
+        android:layout_marginTop="49dp"
+        android:fontFamily="monospace"
         android:text="Difficulty"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
+        android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596"
-        android:layout_below="@+id/radioGroup2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="39dp" />
+        app:layout_constraintVertical_bias="0.596" />
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -137,31 +141,27 @@
 
         <RadioButton
             android:id="@+id/easy"
-            android:layout_width="110dp"
+            android:layout_width="32dp"
             android:layout_height="30dp"
-            android:layout_marginTop="1dp"
+            android:layout_alignBottom="@+id/radioGroup1"
+            android:layout_alignEnd="@+id/rows"
+            android:layout_alignRight="@+id/rows"
+            android:layout_marginBottom="17dp"
             android:layout_weight="4.23"
-            android:text="Easy"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="332dp" />
-
-        <RadioButton
-            android:id="@+id/medium"
-            android:layout_width="95dp"
-            android:layout_height="30dp"
-            android:layout_weight="10.97"
-            android:text="Medium"
+            android:buttonTint="?attr/colorAccent"
+            android:text="Casual"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="332dp" />
 
         <RadioButton
             android:id="@+id/hard"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="Hard"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.88"
+            android:buttonTint="@android:drawable/alert_light_frame"
+            android:text="Hardcore"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="332dp"
-            android:layout_weight="1.88" />
+            tools:layout_editor_absoluteY="332dp" />
 
     </RadioGroup>
 
@@ -180,7 +180,7 @@
 
         <RadioButton
             android:id="@+id/youStart"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginTop="1dp"
             android:layout_weight="6.75"
@@ -190,7 +190,8 @@
 
         <RadioButton
             android:id="@+id/computerStart"
-            android:layout_width="wrap_content"
+            style="@android:style/Widget.CompoundButton.RadioButton"
+            android:layout_width="307dp"
             android:layout_height="30dp"
             android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp"
