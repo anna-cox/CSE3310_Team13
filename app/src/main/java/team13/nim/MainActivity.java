@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
         username = user_name.getText().toString();
 
         if (((RadioButton) findViewById(R.id.play_once)).isChecked())
-            keep_playing = true;
-        else keep_playing = false;
+            keep_playing = false;
+        else keep_playing = true;
 
         if(username!=null && username.length()==0)
         {
@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean is_guest() {return is_guest;}
+
+    public boolean keepPlaying() {return keep_playing;}
 
 
 
@@ -123,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }).start();
-
 
     }
 
