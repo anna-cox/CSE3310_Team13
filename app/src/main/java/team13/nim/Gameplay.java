@@ -240,6 +240,35 @@ public class Gameplay extends AppCompatActivity {
         gps[25] = (GamePiece) findViewById(R.id.gp75);
         gps[26] = (GamePiece) findViewById(R.id.gp76);
         gps[27] = (GamePiece) findViewById(R.id.gp77);
+
+        gps[0].setRow(1);
+        gps[1].setRow(2);
+        gps[2].setRow(2);
+        gps[3].setRow(3);
+        gps[4].setRow(3);
+        gps[5].setRow(3);
+        gps[6].setRow(4);
+        gps[7].setRow(4);
+        gps[8].setRow(4);
+        gps[9].setRow(4);
+        gps[10].setRow(5);
+        gps[11].setRow(5);
+        gps[12].setRow(5);
+        gps[13].setRow(5);
+        gps[14].setRow(5);
+        gps[15].setRow(6);
+        gps[16].setRow(6);
+        gps[17].setRow(6);
+        gps[18].setRow(6);
+        gps[19].setRow(6);
+        gps[20].setRow(6);
+        gps[21].setRow(7);
+        gps[22].setRow(7);
+        gps[23].setRow(7);
+        gps[24].setRow(7);
+        gps[25].setRow(7);
+        gps[26].setRow(7);
+        gps[27].setRow(7);
     }
 
 
