@@ -16,7 +16,7 @@ public class Gameplay extends AppCompatActivity {
     int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
     int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
     String username = intent.getStringExtra(Configurations.PLAYERNAME);
-    int wait = 1;
+    int wait_mult = 1;
 
     int [] gameBoard = new int[numRows];
 
@@ -39,13 +39,19 @@ public class Gameplay extends AppCompatActivity {
 
     public void waitTime(View view)
     {
-        wait++;
+        wait_mult++;
     }
 
     public void remove(View view)
     {
         //add code here to change gp color to removed
 
+        try {
+            wait(wait_mult * 1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (difficulty == 0)
             casualMove();
         if (difficulty == 1)
