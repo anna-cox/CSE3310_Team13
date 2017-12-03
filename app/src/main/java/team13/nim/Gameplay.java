@@ -82,6 +82,7 @@ public class Gameplay extends AppCompatActivity {
     {
         Intent data = getIntent();
         int cntr = 0;
+        int winnable = 28;
         int [] move = new int[2];
         for (int i = 0; i < 28; i++)
         {
@@ -93,6 +94,7 @@ public class Gameplay extends AppCompatActivity {
         }
         //add code here to change gp color to removed
        gameBoard[currentRow - 1] = gameBoard[currentRow - 1] - cntr;
+        winnable = winnable - cntr;
         try {
             wait(wait_mult * 1000);
         }
@@ -114,7 +116,17 @@ public class Gameplay extends AppCompatActivity {
             }
         }
         gameBoard[currentRow] = gameBoard[currentRow] - cntr;
-
+        winnable = winnable - cntr;
+        if (winnable == 0 && data.getBooleanExtra(Configurations.KEEP_PLAYING, false) == true)
+        {
+            finish();
+            startActivity(data);
+        }
+        if (winnable == 0 && data.getBooleanExtra(Configurations.KEEP_PLAYING, false) == false)
+        {
+            finish();
+            backToHome(view);
+        }
     }
 
     public void select(View view)

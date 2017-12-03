@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 is_guest = true;
                 Intent intent = new Intent(MainActivity.this, Configurations.class);
+                finish();
                 startActivity(intent);
             }
         });
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             keep_playing = false;
         else keep_playing = true;
 
+
+
         if(username!=null && username.length()==0)
         {
             Toast.makeText(getBaseContext(), "Enter username" , Toast.LENGTH_SHORT ).show();
@@ -85,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, Configurations.class);
             intent.putExtra(USERNAME, username);
+            finish();
             startActivity(intent);
         }
     }

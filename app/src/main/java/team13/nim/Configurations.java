@@ -15,6 +15,7 @@ public class Configurations extends AppCompatActivity {
     public static final String NUMROWS = "com.team13.nim.numrows";
     public static final String PLAYERNAME = "com.team13.nim.username";
     public static final String DIFFICULTY = "com.team13.nim.difficulty";
+    public static final String KEEP_PLAYING = "com.team13.nim.keep_playing";
 
     String username;
 
@@ -62,6 +63,7 @@ public class Configurations extends AppCompatActivity {
         int whoStarts;
         int numRows;
         int difficulty;
+        boolean keep_playing = false;
 
         //gets the start player from the radio buttons
         if (((RadioButton) findViewById(R.id.computerStart)).isChecked()) {
@@ -88,12 +90,11 @@ public class Configurations extends AppCompatActivity {
         intent.putExtra(STARTPLAYER, whoStarts);
         intent.putExtra(NUMROWS, numRows);
         intent.putExtra(DIFFICULTY, difficulty);
-
+        intent.putExtra(KEEP_PLAYING, keep_playing);
 
         //starts the next activity
+        finish();
         startActivity(intent);
 
     }
-
-
 }
