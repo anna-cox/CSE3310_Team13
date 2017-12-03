@@ -30,37 +30,6 @@ public class Gameplay extends AppCompatActivity {
         username = intent.getStringExtra(Configurations.PLAYERNAME);
         buildBoard();
 
-
-        int [] gameBoard = new int[numRows];
-        for (int i = 0; i < numRows; i++)
-        {
-            gameBoard[i] = i + 1;
-            /*
-            switch(i) {
-                case 0:
-                    gameBoard[i] = 0b0001;
-                    break;
-                case 1:
-                    gameBoard[i] = 0b0010;
-                    break;
-                case 2:
-                    gameBoard[i] = 0b0011;
-                    break;
-                case 3:
-                    gameBoard[i] = 0b0100;
-                    break;
-                case 4:
-                    gameBoard[i] = 0b0101;
-                    break;
-                case 5:
-                    gameBoard[i] = 0b0110;
-                    break;
-                case 6:
-                    gameBoard[i] = 0b0111;
-                    break;
-            }
-            */
-        }
         makeArray();
 
 
@@ -70,6 +39,7 @@ public class Gameplay extends AppCompatActivity {
     public void backToHome(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
@@ -196,29 +166,7 @@ public class Gameplay extends AppCompatActivity {
     void buildBoard() {
         Intent data = getIntent();
         for (int i = 0; i < data.getIntExtra(Configurations.NUMROWS, 0); i++) {
-            switch (i) {
-                case 0:
-                    gameBoard[i] = 0b0001;
-                    break;
-                case 1:
-                    gameBoard[i] = 0b0010;
-                    break;
-                case 2:
-                    gameBoard[i] = 0b0011;
-                    break;
-                case 3:
-                    gameBoard[i] = 0b0100;
-                    break;
-                case 4:
-                    gameBoard[i] = 0b0101;
-                    break;
-                case 5:
-                    gameBoard[i] = 0b0110;
-                    break;
-                case 6:
-                    gameBoard[i] = 0b0111;
-                    break;
-            }
+            gameBoard[i] = i + 1;
         }
     }
 
