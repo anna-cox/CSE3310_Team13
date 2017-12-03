@@ -111,7 +111,7 @@ public class Gameplay extends AppCompatActivity {
 
         for(int i=0; i<28; i++)
         {
-            if(gps[i].getRow() != currentRow)
+            if(gps[i].getRow() != currentRow && gps[i].getColor() != 2)
                 gps[i].chngColor(0);
         }
 
