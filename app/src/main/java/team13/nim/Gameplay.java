@@ -10,11 +10,11 @@ import java.util.*;
 public class Gameplay extends AppCompatActivity {
 
     String username = null;
-    int wait = 0;
     GamePiece gps[] = new GamePiece[28];
     int wait_mult = 1;
+    int currentRow;
 
-    int [] gameBoard = new int[7];
+    int [] gameBoard = new int[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,8 @@ public class Gameplay extends AppCompatActivity {
         int [] gameBoard = new int[numRows];
         for (int i = 0; i < numRows; i++)
         {
+            gameBoard[i] = i + 1;
+            /*
             switch(i) {
                 case 0:
                     gameBoard[i] = 0b0001;
@@ -57,6 +59,7 @@ public class Gameplay extends AppCompatActivity {
                     gameBoard[i] = 0b0111;
                     break;
             }
+            */
         }
         makeArray();
 
@@ -78,9 +81,18 @@ public class Gameplay extends AppCompatActivity {
     public void remove(View view)
     {
         Intent data = getIntent();
-
+        int cntr = 0;
+        int [] move = new int[2];
+        for (int i = 0; i < 28; i++)
+        {
+            if (gps[i].getColor() == 1)
+            {
+                cntr++;
+                gps[i].chngColor(2);
+            }
+        }
         //add code here to change gp color to removed
-
+       gameBoard[currentRow - 1] = gameBoard[currentRow - 1] - cntr;
         try {
             wait(wait_mult * 1000);
         }
@@ -88,20 +100,32 @@ public class Gameplay extends AppCompatActivity {
             e.printStackTrace();
         }
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 0)
-            casualMove();
+            move = casualMove();
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 1)
-            hardcoreMove();
+            move = hardcoreMove();
+        currentRow = move[0];
+        cntr = move[1];
+        for (int j = 0; j < 28; j++)
+        {
+            if (gps[j].getRow() == currentRow && gps[j].getColor() == 0 && cntr > 0)
+            {
+                gps[j].chngColor(2);
+                cntr--;
+            }
+        }
+        gameBoard[currentRow] = gameBoard[currentRow] - cntr;
 
     }
 
     public void select(View view)
     {
+
         //add logic to stop illegal selection
         GamePiece gp = (GamePiece) view;
         if(gp.getColor() == 2)
             return;
 
-        int currentRow = gp.getRow();
+        currentRow = gp.getRow();
 
         for(int i=0; i<28; i++)
         {
