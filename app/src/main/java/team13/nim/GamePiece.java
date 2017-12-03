@@ -4,6 +4,9 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.helpers.AttributesImpl;
+
 /**
  * Created by Addison on 11/29/2017.
  */
@@ -12,6 +15,8 @@ public class GamePiece extends android.support.v7.widget.AppCompatButton {
 
     int color; //0=unselected, 1=selected, 2=removed
     int numRow;
+    AttributesImpl a = new AttributesImpl();
+    int index = a.getIndex("minWidth");
 
     public GamePiece(Context context)
     {
@@ -21,12 +26,12 @@ public class GamePiece extends android.support.v7.widget.AppCompatButton {
     public GamePiece(Context context, AttributeSet attrs)
     {
         super(context, attrs);
-        numRow = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "minWidth",8);
+        numRow = attrs.getAttributeIntValue(index,8);
     }
     public GamePiece(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-        numRow = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "minWidth",8);
+        numRow = attrs.getAttributeIntValue(index,8);
     }
 
     public void chngColor(int c)
@@ -45,6 +50,9 @@ public class GamePiece extends android.support.v7.widget.AppCompatButton {
         return color;
     }
 
-    public int getRow(){return numRow;}
+    public int getRow()
+    {
+        return numRow;
+    }
 
 }
