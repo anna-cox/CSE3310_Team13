@@ -9,28 +9,100 @@ import java.util.*;
 
 public class Gameplay extends AppCompatActivity {
 
-    String username = null;
-    int wait = 0;
+    Intent intent = getIntent();
+
+    //gets the values from the parent activity
+    int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
+    int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
+    int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
+    String username = intent.getStringExtra(Configurations.PLAYERNAME);
+    int wait = 1;
+
+    int [] gameBoard = new int[numRows];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);
+        buildBoard();
 
 
-        Intent intent = getIntent();
-
-        //gets the values from the parent activity
-        int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
-        int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
-        int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
-        username = intent.getStringExtra(Configurations.PLAYERNAME);
 
 
-        int [] gameBoard = new int[numRows];
-        for (int i = 0; i < numRows; i++)
+    }
+
+    public void backToHome(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void waitTime(View view)
+    {
+        wait++;
+    }
+
+    public void remove(View view)
+    {
+        //add code here to change gp color to removed
+
+        if (difficulty == 0)
+            casualMove();
+        if (difficulty == 1)
+            hardcoreMove();
+
+    }
+
+    public void select(View view)
+    {
+        //add logic to stop illegal selection
+        //add code to change color to selected
+    }
+
+    public int[] casualMove()
+    {
+        Random random = new Random();
+        int row = random.nextInt(numRows + 1 - 0) + 0;
+        int remove = random.nextInt(gameBoard[row] + 1 - 1) + 1;
+        int [] move = {row, remove};
+        return move;
+    }
+
+    public int[] hardcoreMove()
+    {
+        int nimSum = calcNimSum(gameBoard);
+        int [] temp = gameBoard.clone();
+        int [] move = new int[2];
+        if (nimSum == 0)
+            casualMove();
+        for (int k = 0; k < numRows; k++)
         {
-            switch(i) {
+            temp[k] = temp[k] - nimSum;
+            if (calcNimSum(temp) == 0)
+                {
+                    //correct move
+                    move = new int[]{k, nimSum};
+                    break;
+                }
+            else
+                temp = gameBoard.clone();
+        }
+        return move;
+    }
+
+    public int calcNimSum(int [] arr)
+    {
+        int ret = 0;
+        for (int j = 0; j < numRows; j++)
+        {
+            ret = ret ^ gameBoard[j];
+        }
+        return ret;
+    }
+
+    void buildBoard() {
+        for (int i = 0; i < numRows; i++) {
+            switch (i) {
                 case 0:
                     gameBoard[i] = 0b0001;
                     break;
@@ -54,69 +126,7 @@ public class Gameplay extends AppCompatActivity {
                     break;
             }
         }
-
     }
-
-    public void backToHome(View view)
-    {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-    public void waitTime(View view)
-    {
-        wait++;
-    }
-
-    public void remove(View view)
-    {
-        //add code here to change gp color to removed
-
-        //add code here to update the nimsum array
-    }
-
-    public void select(View view)
-    {
-        //add logic to stop illegal selection
-        //add code to change color to selected
-    }
-
-/*
-    public int[] casualMove()
-    {
-        Random random = new Random();
-        int row = random.nextInt(numRows + 1 - 0) + 0;
-        int remove = random.nextInt(gameBoard[row] + 1 - 1) + 1;
-        int [] move = {row, remove};
-    }
-
-    public int[] hardcoreMove()
-    {
-        int nimSum = calcNimSum(gameBoard);
-        int [] temp = gameBoard.clone();
-        for (int k = 0; k < numRows; k++)
-        {
-            temp[k] = temp[k] - nimSum;
-            if (calcNimSum == 0)
-                {
-                    //correct move
-                    int [] move = {k, nimSum};
-                    break;
-                }
-            else
-                temp = gameBoard.clone
-        }
-    }
-
-    public int calcNimSum(int [] arr)
-    {
-        int ret = 0;
-        for (int j = 0; j < numRows; j++)
-        {
-            ret = ret ^ gameBoard[j];
-        }
-    }
-*/
 
 
 
