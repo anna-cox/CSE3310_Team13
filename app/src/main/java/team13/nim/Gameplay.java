@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.*;
 
 public class Gameplay extends AppCompatActivity {
@@ -28,9 +30,22 @@ public class Gameplay extends AppCompatActivity {
         int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
         int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
         username = intent.getStringExtra(Configurations.PLAYERNAME);
+
+
         buildBoard();
 
         makeArray();
+
+        if(numRows == 6)
+        {
+            for(int i=21;i<28;i++)
+                gps[i].setVisibility(View.INVISIBLE);
+        }
+        else if( numRows == 5)
+        {
+            for(int i = 15; i<28;i++)
+                gps[i].setVisibility(View.INVISIBLE);
+        }
 
 
 
@@ -50,11 +65,25 @@ public class Gameplay extends AppCompatActivity {
 
     public void remove(View view)
     {
+        int selected = 0;
+        int i =0;
+        while(i<28&&selected ==0)
+        {
+            if(gps[i].getColor()==1)
+                selected = 1;
+            i++;
+        }
+        if(selected == 0)
+        {
+            Toast.makeText(getBaseContext(), "No Pieces Selected" , Toast.LENGTH_SHORT ).show();
+            return;
+        }
+
         Intent data = getIntent();
         int cntr = 0;
         int winnable = 28;
         int [] move = new int[2];
-        for (int i = 0; i < 28; i++)
+        for (i = 0; i < 28; i++)
         {
             if (gps[i].getColor() == 1)
             {
@@ -195,7 +224,7 @@ public class Gameplay extends AppCompatActivity {
         gps[19] = (GamePiece) findViewById(R.id.gp65);
         gps[20] = (GamePiece) findViewById(R.id.gp66);
         gps[21] = (GamePiece) findViewById(R.id.gp71);
-        gps[22] = (GamePiece) findViewById(R.id.gp71);
+        gps[22] = (GamePiece) findViewById(R.id.gp72);
         gps[23] = (GamePiece) findViewById(R.id.gp73);
         gps[24] = (GamePiece) findViewById(R.id.gp74);
         gps[25] = (GamePiece) findViewById(R.id.gp75);
