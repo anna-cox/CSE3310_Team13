@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static final String USERNAME = "com.team13.Nim.MESSAGE";
+    public static final String KEEPPLAYING = "com.team13.Nim.keepplaying";
+
 
     private static userDatabase db = null;
 
@@ -44,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 is_guest = true;
                 Intent intent = new Intent(MainActivity.this, Configurations.class);
-                finish();
+                if (((RadioButton) findViewById(R.id.play_once)).isChecked())
+                    keep_playing = false;
+                else keep_playing = true;
+
+                intent.putExtra(KEEPPLAYING, keep_playing);
+                //finish();
                 startActivity(intent);
             }
         });
@@ -88,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, Configurations.class);
             intent.putExtra(USERNAME, username);
-            finish();
+            intent.putExtra(KEEPPLAYING, keep_playing);
+            //finish();
             startActivity(intent);
         }
     }
