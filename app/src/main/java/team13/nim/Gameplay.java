@@ -127,8 +127,11 @@ public class Gameplay extends AppCompatActivity {
         }*/
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 1)
             move = casualMove();
-        if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 2)
+        if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 2) {
+            System.out.println("\n\n NIGGA WE MADE IT \n\n");
             move = hardcoreMove();
+            System.out.println("\n\n" + move[0] + "\n\n" + move[1] + "\n\n");
+        }
         currentRow = move[0];
         cntr = move[1];
         gameBoard[currentRow] = gameBoard[currentRow] - cntr;
@@ -202,20 +205,30 @@ public class Gameplay extends AppCompatActivity {
         int [] temp = gameBoard.clone();
         int [] move = new int[2];
         if (nimSum == 0)
-            casualMove();
+        {
+            move = casualMove();
+            return move;
+        }
         for (int k = 0; k < data.getIntExtra(Configurations.NUMROWS, 0); k++)
         {
+            System.out.println("\n\n" + temp[k] + "\n\n");
             temp[k] = temp[k] - nimSum;
             if (calcNimSum(temp) == 0)
                 {
                     //correct move
-                    move = new int[]{k, nimSum};
-                    break;
+                    move[0] = k;
+                    move[1] = nimSum;
+                    return move;
                 }
             else
                 temp = gameBoard.clone();
         }
-        return move;
+        if (move[0] == 0 && move[1] == 0)
+        {
+            move = casualMove();
+            return move;
+        }
+        return null;
     }
 
     public int calcNimSum(int [] arr)
@@ -224,7 +237,7 @@ public class Gameplay extends AppCompatActivity {
         int ret = 0;
         for (int j = 0; j < data.getIntExtra(Configurations.NUMROWS, 0); j++)
         {
-            ret = ret ^ gameBoard[j];
+            ret = ret ^ arr[j];
         }
         return ret;
     }
