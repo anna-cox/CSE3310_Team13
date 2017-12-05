@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import java.util.*;
 
+import static java.lang.Thread.sleep;
+
 public class Gameplay extends AppCompatActivity {
 
     String username = null;
@@ -119,18 +121,15 @@ public class Gameplay extends AppCompatActivity {
         //add code here to change gp color to removed
        gameBoard[currentRow] = gameBoard[currentRow] - cntr;
         winnable = winnable - cntr;
-        /*try {
-            wait(wait_mult * 1000);
-        }
-        catch (InterruptedException e) {
+        try {
+            sleep(wait_mult * 1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 1)
             move = casualMove();
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 2) {
-            System.out.println("\n\n NIGGA WE MADE IT \n\n");
             move = hardcoreMove();
-            System.out.println("\n\n" + move[0] + "\n\n" + move[1] + "\n\n");
         }
         currentRow = move[0];
         cntr = move[1];
@@ -211,7 +210,6 @@ public class Gameplay extends AppCompatActivity {
         }
         for (int k = 0; k < data.getIntExtra(Configurations.NUMROWS, 0); k++)
         {
-            System.out.println("\n\n" + temp[k] + "\n\n");
             temp[k] = temp[k] - nimSum;
             if (calcNimSum(temp) == 0)
                 {
