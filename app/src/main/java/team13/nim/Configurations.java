@@ -24,14 +24,10 @@ public class Configurations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configurations);
 
-        //get the intent that created the activity
         Intent intent = getIntent();
 
-        //now this activity has the username
+
         username = intent.getStringExtra(MainActivity.USERNAME);
-
-
-        //String username = intent.getStringExtra(MainActivity.username);
 
 
         if(!(MainActivity.get().is_guest()))
@@ -56,14 +52,14 @@ public class Configurations extends AppCompatActivity {
 
 
     public void startGame(View view) {
-        //creates the intent with the configurations class
+
         Intent intent = new Intent(this, Gameplay.class);
 
 
         int whoStarts;
         int numRows;
         int difficulty;
-        //boolean keep_playing = false;
+
 
         //gets the start player from the radio buttons
         if (((RadioButton) findViewById(R.id.computerStart)).isChecked()) {
@@ -90,7 +86,8 @@ public class Configurations extends AppCompatActivity {
         intent.putExtra(STARTPLAYER, whoStarts);
         intent.putExtra(NUMROWS, numRows);
         intent.putExtra(DIFFICULTY, difficulty);
-        //intent.putExtra(KEEP_PLAYING, keep_playing);
+        intent.putExtra(PLAYERNAME, username);
+
 
         //starts the next activity
         finish();

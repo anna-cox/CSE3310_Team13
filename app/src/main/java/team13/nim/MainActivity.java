@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static final String USERNAME = "com.team13.Nim.MESSAGE";
-    public static final String KEEPPLAYING = "com.team13.Nim.keepplaying";
+
 
 
     private static userDatabase db = null;
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     keep_playing = false;
                 else keep_playing = true;
 
-                intent.putExtra(KEEPPLAYING, keep_playing);
-                //finish();
+
+                finish();
                 startActivity(intent);
             }
         });
@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
         {
             Intent intent = new Intent(MainActivity.this, Configurations.class);
             intent.putExtra(USERNAME, username);
-            intent.putExtra(KEEPPLAYING, keep_playing);
+
             //finish();
             startActivity(intent);
         }
     }
 
-    public static String username_getter()
+    public static String getUsername()
     {
         return username;
     }

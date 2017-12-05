@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.*;
@@ -34,7 +33,7 @@ public class Gameplay extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //gets the values from the parent activity
+
         int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
         int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
         int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
@@ -57,17 +56,13 @@ public class Gameplay extends AppCompatActivity {
                 gps[i].setVisibility(View.INVISIBLE);
             winnable = 15;
         }
+        else
+            winnable = 28;
 
         if (whoStarts == 1)
         {
             int [] move = new int[2];
             int cntr = 0;
-            if (numRows == 5)
-               winnable = 15;
-            if (numRows == 6)
-                winnable = 21;
-            if (numRows == 7)
-                winnable = 28;
             if (difficulty == 1)
                 move = casualMove();
             if (difficulty == 2)
@@ -125,22 +120,29 @@ public class Gameplay extends AppCompatActivity {
             if (gps[i].getColor() == 1)
             {
                 cntr++;
+
                 gps[i].chngColor(2);
+
             }
         }
-        //add code here to change gp color to removed
-       gameBoard[currentRow] = gameBoard[currentRow] - cntr;
+
+
         winnable = winnable - cntr;
+        keepGoing();
+        if(winnable == 0)
+            return;
+
+
+        turn = 1;
+
+       gameBoard[currentRow] = gameBoard[currentRow] - cntr;
+
         try {
             sleep(wait_mult * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        keepGoing();
-        if(winnable == 0)
-            return;
-        turn = 1;
 
         if (data.getIntExtra(Configurations.DIFFICULTY, 0) == 1)
             move = casualMove();
@@ -163,19 +165,14 @@ public class Gameplay extends AppCompatActivity {
         if(winnable == 0)
             return;
 
-        turn = 0;
 
-        System.out.println(winnable);
-        System.out.println(winnable);
-        System.out.println(winnable);
-        System.out.println(winnable);
+        turn = 0;
 
     }
 
     public void select(View view)
     {
 
-        //add logic to stop illegal selection
         GamePiece gp = (GamePiece) view;
         if(gp.getColor() == 2)
             return;
@@ -188,7 +185,6 @@ public class Gameplay extends AppCompatActivity {
                 gps[i].chngColor(0);
         }
 
-        //add code to change color to selected
         gp.chngColor(1);
     }
 
@@ -266,71 +262,76 @@ public class Gameplay extends AppCompatActivity {
 
     void keepGoing()
     {
-        if(winnable!=0)
-            return;
-
-        if(turn == 0)
-            Toast.makeText(getBaseContext(), "You Lost", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(getBaseContext(), "You Won", Toast.LENGTH_SHORT).show();
-
-        if(username != null)
+        if(winnable==0)
         {
 
+            if(turn == 0)
+                Toast.makeText(getBaseContext(), "You Lost", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(getBaseContext(), "You Won", Toast.LENGTH_SHORT).show();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            if(username != null)
+            {
 
-                    UserData player = MainActivity.get().getDB().userDao().getUser(username);
-                    if (turn == 0) {
 
-                        int losses = player.getLosses();
-                        losses++;
-                        player.setLosses(losses);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
 
-                    } else {
+                        UserData player = MainActivity.get().getDB().userDao().getUser(username);
+                        if (turn == 0) {
 
-                        int wins = player.getWins();
-                        wins++;
-                        player.setWins(wins);
+                            int losses = player.getLosses();
+                            losses++;
+                            player.setLosses(losses);
+
+                        } else {
+
+                            int wins = player.getWins();
+                            wins++;
+                            player.setWins(wins);
+
+                        }
+
+                        MainActivity.get().getDB().userDao().addGame(player);
+
 
                     }
+                }).start();
+            }
 
-                    MainActivity.get().getDB().userDao().addGame(player);
 
 
-                }
-            }).start();
+            boolean keep = MainActivity.get().keepPlaying();
+            if (keep)
+            {
+
+
+                Intent intent = getIntent();
+
+                int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
+                int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
+                int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
+
+                intent.putExtra(STARTPLAYER, whoStarts);
+                intent.putExtra(NUMROWS, numRows);
+                intent.putExtra(DIFFICULTY, difficulty);
+                intent.putExtra(PLAYERNAME, username);
+
+                finish();
+                startActivity(intent);
+
+            }
+            if (!keep)
+            {
+                Intent intent = new Intent(this, MainActivity.class);
+
+                finish();
+                startActivity(intent);
+            }
         }
 
 
-
-        boolean keep = MainActivity.get().keepPlaying();
-        if (keep)
-        {
-
-
-            Intent intent = getIntent();
-
-            int numRows = intent.getIntExtra(Configurations.NUMROWS, 0);
-            int whoStarts = intent.getIntExtra(Configurations.STARTPLAYER, 0);
-            int difficulty = intent.getIntExtra(Configurations.DIFFICULTY, 0);
-
-            intent.putExtra(STARTPLAYER, whoStarts);
-            intent.putExtra(NUMROWS, numRows);
-            intent.putExtra(DIFFICULTY, difficulty);
-            intent.putExtra(PLAYERNAME, username);
-            finish();
-            startActivity(intent);
-        }
-        if (!keep)
-        {
-            Intent intent = new Intent(this, MainActivity.class);
-
-            finish();
-            startActivity(intent);
-        }
     }
 
     public void makeArray()

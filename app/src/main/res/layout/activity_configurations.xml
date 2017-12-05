@@ -171,7 +171,7 @@
 
         <RadioButton
             android:id="@+id/youStart"
-            android:layout_width="110dp"
+            android:layout_width="246dp"
             android:layout_height="30dp"
             android:layout_marginTop="1dp"
             android:layout_weight="6.75"
