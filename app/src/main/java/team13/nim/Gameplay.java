@@ -98,6 +98,7 @@ public class Gameplay extends AppCompatActivity {
 
     public void remove(View view)
     {
+        //if no pieces are selected then give the user a notification and don't remove anything
         int selected = 0;
         int i =0;
         while(i<28&&selected ==0)
@@ -260,16 +261,22 @@ public class Gameplay extends AppCompatActivity {
         }
     }
 
+    //determines if the game has been completeted and if so who the winner is based on turn
+    //if a username was provided, adds either a win or a loss to the database
+
     void keepGoing()
     {
+        //if there are no pieces left
         if(winnable==0)
         {
 
+            //notification telling the user that they won or lost
             if(turn == 0)
                 Toast.makeText(getBaseContext(), "You Lost", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(getBaseContext(), "You Won", Toast.LENGTH_SHORT).show();
 
+            //if username provided, add win or loss to the database
             if(username != null)
             {
 
@@ -303,6 +310,7 @@ public class Gameplay extends AppCompatActivity {
 
 
             boolean keep = MainActivity.get().keepPlaying();
+            //if keep playing option was selected, restart the gameplay activity
             if (keep)
             {
 
@@ -322,6 +330,7 @@ public class Gameplay extends AppCompatActivity {
                 startActivity(intent);
 
             }
+            //if play once was selected, start the main activity to go to the homepage
             if (!keep)
             {
                 Intent intent = new Intent(this, MainActivity.class);

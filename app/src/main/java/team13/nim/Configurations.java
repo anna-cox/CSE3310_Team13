@@ -30,6 +30,7 @@ public class Configurations extends AppCompatActivity {
         username = intent.getStringExtra(MainActivity.USERNAME);
 
 
+        //if username provided at user to the database
         if(!(MainActivity.get().is_guest()))
         {
             final UserData user = new UserData();

@@ -96,15 +96,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Configurations.class);
             intent.putExtra(USERNAME, username);
 
-            //finish();
+            finish();
             startActivity(intent);
         }
     }
 
-    public static String getUsername()
-    {
-        return username;
-    }
 
     public boolean is_guest() {return is_guest;}
 
