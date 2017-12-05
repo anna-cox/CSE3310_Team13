@@ -15,7 +15,7 @@ public class Gameplay extends AppCompatActivity {
     GamePiece gps[] = new GamePiece[28];
     int wait_mult = 1;
     int currentRow;
-
+    int winnable;
     int [] gameBoard = new int[7];
 
     @Override
@@ -47,7 +47,33 @@ public class Gameplay extends AppCompatActivity {
                 gps[i].setVisibility(View.INVISIBLE);
         }
 
-
+        if (whoStarts == 1)
+        {
+            int [] move = new int[2];
+            int cntr = 0;
+            if (numRows == 5)
+               winnable = 15;
+            if (numRows == 6)
+                winnable = 21;
+            if (numRows == 7)
+                winnable = 28;
+            if (difficulty == 1)
+                move = casualMove();
+            if (difficulty == 2)
+                move = hardcoreMove();
+            currentRow = move[0];
+            cntr = move[1];
+            gameBoard[currentRow] = gameBoard[currentRow] - cntr;
+            winnable = winnable - cntr;
+            for (int j = 0; j < 28; j++)
+            {
+                if ((gps[j].getRow() == currentRow) && (gps[j].getColor() == 0) && (cntr > 0))
+                {
+                    gps[j].chngColor(2);
+                    cntr--;
+                }
+            }
+        }
 
     }
 
@@ -81,7 +107,6 @@ public class Gameplay extends AppCompatActivity {
 
         Intent data = getIntent();
         int cntr = 0;
-        int winnable = 28;
         int [] move = new int[2];
         for (i = 0; i < 28; i++)
         {
@@ -106,6 +131,8 @@ public class Gameplay extends AppCompatActivity {
             move = hardcoreMove();
         currentRow = move[0];
         cntr = move[1];
+        gameBoard[currentRow] = gameBoard[currentRow] - cntr;
+        winnable = winnable - cntr;
         for (int j = 0; j < 28; j++)
         {
             if ((gps[j].getRow() == currentRow) && (gps[j].getColor() == 0) && (cntr > 0))
@@ -114,8 +141,6 @@ public class Gameplay extends AppCompatActivity {
                 cntr--;
             }
         }
-        gameBoard[currentRow] = gameBoard[currentRow] - cntr;
-        winnable = winnable - cntr;
         if (winnable == 0 && data.getBooleanExtra(Configurations.KEEP_PLAYING, false) == true)
         {
             finish();
@@ -152,9 +177,20 @@ public class Gameplay extends AppCompatActivity {
     {
         Intent data = getIntent();
         Random random = new Random();
-        int row = random.nextInt(data.getIntExtra(Configurations.NUMROWS, 0) + 1 - 0) + 0;
-        System.out.println(row);
-        int remove = random.nextInt(gameBoard[row] + 1 - 1) + 1;
+        int row = random.nextInt(data.getIntExtra(Configurations.NUMROWS, 0));
+        while (gameBoard[row] == 0)
+        {
+            row = random.nextInt(data.getIntExtra(Configurations.NUMROWS, 0));
+        }
+        int remove;
+        if (gameBoard[row] == 1)
+        {
+            remove = 1;
+        }
+        else
+        {
+            remove = random.nextInt(gameBoard[row]) + 1;
+        }
         int [] move = {row, remove};
         return move;
     }
